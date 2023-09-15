@@ -91,7 +91,7 @@ abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
 
   Widget _buildContainer(List<Widget> list) {
     return Stack(
-      children: list,
+      children: getList(list),
     );
   }
 
@@ -263,6 +263,27 @@ abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
     }
 
     _animationController.value = value;
+  }
+
+  List<Widget> getList(List<Widget> list) {
+    final tempList = <Widget>[];
+    var startIndex = 0;
+    var endIndex = list.length - 1;
+
+    while (startIndex <= endIndex) {
+      if (startIndex == endIndex) {
+        // 处理剩下的最后一个元素
+        tempList.add(list[startIndex]);
+      } else {
+        // 添加头尾元素和中间元素
+        tempList..add(list[startIndex])
+        ..add(list[endIndex]);
+      }
+
+      startIndex++;
+      endIndex--;
+    }
+    return tempList;
   }
 }
 
