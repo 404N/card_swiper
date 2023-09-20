@@ -200,7 +200,8 @@ abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
         reverse: false,
       );
       if (_currentIndex == newIndex) return;
-      return _move(event.targetPosition, nextIndex: newIndex);
+      return _move(event.targetPosition,
+          nextIndex: newIndex, duration: event.duration);
     } else if (event is MoveIndexControllerEvent) {
       final newIndex = _getProperNewIndex(event.newIndex);
       if (_currentIndex == newIndex) return;
