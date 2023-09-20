@@ -6,11 +6,11 @@ import 'package:flutter/widgets.dart';
 abstract class IndexControllerEventBase {
   IndexControllerEventBase({
     required this.animation,
-    this.duration = const Duration(seconds: 3),
+    this.duration,
   });
 
   final bool animation;
-  final Duration duration;
+  final Duration? duration;
 
   final completer = Completer<void>();
 
