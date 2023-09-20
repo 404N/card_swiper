@@ -57,7 +57,7 @@ class NextIndexControllerEvent extends IndexControllerEventBase
     with TargetedPositionControllerEvent, StepBasedIndexControllerEvent {
   NextIndexControllerEvent({
     required bool animation,
-    required Duration duration,
+    required Duration? duration,
   }) : super(
           animation: animation,
           duration: duration,
@@ -91,7 +91,7 @@ class MoveIndexControllerEvent extends IndexControllerEventBase
     required this.newIndex,
     required this.oldIndex,
     required bool animation,
-    required Duration duration,
+    required Duration? duration,
   }) : super(
           animation: animation,
           duration: duration,
@@ -108,7 +108,7 @@ class IndexController extends ChangeNotifier {
   int index = 0;
 
   Future<void> move(int index,
-      {bool animation = true, Duration duration = const Duration(seconds: 3)}) {
+      {bool animation = true, Duration? duration}) {
     final e = event = MoveIndexControllerEvent(
         animation: animation,
         newIndex: index,
@@ -120,7 +120,7 @@ class IndexController extends ChangeNotifier {
 
   Future<void> next({
     bool animation = true,
-    Duration duration = const Duration(seconds: 3),
+    Duration? duration,
   }) {
     final e = event =
         NextIndexControllerEvent(animation: animation, duration: duration);
