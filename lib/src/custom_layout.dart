@@ -147,13 +147,14 @@ abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
 
   bool _lockScroll = false;
 
-  Future<void> _move(double position, {int? nextIndex}) async {
+  Future<void> _move(double position,
+      {int? nextIndex, Duration? duration}) async {
     if (_lockScroll) return;
     try {
       _lockScroll = true;
       await _animationController.animateTo(
         position,
-        duration: Duration(milliseconds: widget.duration!),
+        duration: duration ?? Duration(milliseconds: widget.duration ?? 300),
         curve: widget.curve,
       );
       if (nextIndex != null) {
@@ -203,7 +204,8 @@ abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
     } else if (event is MoveIndexControllerEvent) {
       final newIndex = _getProperNewIndex(event.newIndex);
       if (_currentIndex == newIndex) return;
-      return _move(event.targetPosition, nextIndex: newIndex);
+      return _move(event.targetPosition,
+          nextIndex: newIndex, duration: event.duration);
     }
   }
 
@@ -276,8 +278,9 @@ abstract class _CustomLayoutStateBase<T extends _SubSwiper> extends State<T>
         tempList.add(list[startIndex]);
       } else {
         // 添加头尾元素和中间元素
-        tempList..add(list[startIndex])
-        ..add(list[endIndex]);
+        tempList
+          ..add(list[startIndex])
+          ..add(list[endIndex]);
       }
 
       startIndex++;
