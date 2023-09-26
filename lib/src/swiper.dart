@@ -566,6 +566,7 @@ class _SwiperState extends _SwiperTimerMixin {
         index: _activeIndex,
         curve: widget.curve,
         duration: widget.duration,
+        physics: widget.physics,
         onIndexChanged: _onIndexChanged,
         controller: _controller,
         scrollDirection: widget.scrollDirection,
@@ -698,6 +699,7 @@ abstract class _SubSwiper extends StatefulWidget {
     this.scrollDirection = Axis.horizontal,
     this.axisDirection = AxisDirection.left,
     this.onIndexChanged,
+    this.physics =const BouncingScrollPhysics(),
   }) : super(key: key);
 
   final IndexedWidgetBuilder? itemBuilder;
@@ -711,6 +713,7 @@ abstract class _SubSwiper extends StatefulWidget {
   final double? itemHeight;
   final bool loop;
   final Axis? scrollDirection;
+  final ScrollPhysics? physics;
   final AxisDirection? axisDirection;
 
   @override
